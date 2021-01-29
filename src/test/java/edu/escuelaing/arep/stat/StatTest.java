@@ -1,36 +1,90 @@
 package edu.escuelaing.arep.stat;
-
-import edu.escuelaing.arep.app.AppTest;
-import junit.framework.Test;
+import edu.escuelaing.arep.list.LinkedListException;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Test;
 
 public class StatTest extends TestCase {
 
     /**
-     * Create the test case
-     *
-     * @param testName name of the test case
+     * Constructor de la clase de pruebas StatTest
+     * @param testName nombre de la prueba a ejecutar
      */
-    public StatTest( String testName )
-    {
-        super( testName );
+    public StatTest(String testName){
+        super (testName);
     }
 
     /**
-     * @return the suite of tests being tested
+     * Prueba encargada de evaluar la media con unos valores manualmente insertados
      */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    @Test
+    public void testMean() {
+        Stat data = new Stat();
+        data.addNumber(15.0);
+        data.addNumber(69.9);
+        data.addNumber(6.5);
+        data.addNumber(22.4);
+        data.addNumber(28.4);
+        data.addNumber(65.9);
+        data.addNumber(19.4);
+        data.addNumber(198.7);
+        data.addNumber(38.8);
+        data.addNumber(138.2);
+        try {
+            assertEquals(data.mean(), 60.32);
+        } catch (LinkedListException e) {
+            assertTrue(false);
+        }
     }
 
     /**
-     * Rigourous Test :-)
+     * Prueba encargada de evaluar la media con unos valores provenientes de un documento
      */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    public void testMeanFile() {
+        Stat data = new Stat("numbersFile.txt");
+        try {
+            assertEquals(data.mean(), 550.6);
+        } catch (LinkedListException e) {
+            assertTrue(false);
+        }
+
     }
+
+    /**
+     * Prueba encargada de evaluar la desviación estándar con unos valores manualmente insertados
+     */
+    @Test
+    public void testStddev() {
+        Stat data = new Stat();
+        data.addNumber(15.0);
+        data.addNumber(69.9);
+        data.addNumber(6.5);
+        data.addNumber(22.4);
+        data.addNumber(28.4);
+        data.addNumber(65.9);
+        data.addNumber(19.4);
+        data.addNumber(198.7);
+        data.addNumber(38.8);
+        data.addNumber(138.2);
+        try {
+            assertEquals(data.stddev(), 62.26);
+        } catch (LinkedListException e) {
+            assertTrue(false);
+        }
+    }
+        /**
+         * Prueba encargada de evaluar la desviación estándar con unos valores provenientes de un documento
+         */
+        @Test
+        public void testStddevFile() {
+            Stat data = new Stat("numbersFile.txt");
+            try {
+                assertEquals(data.stddev(), 572.03);
+            } catch (LinkedListException e) {
+                assertTrue(false);
+            }
+        }
+
+
 
 }
